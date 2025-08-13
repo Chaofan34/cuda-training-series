@@ -106,3 +106,8 @@ int main()
   printf("Success!\n");
   return 0;
 }
+
+// $ ./matrix_mul, 没有开优化，CPU频率3GHZ，不懂为啥需要978s
+// TimeMonitor::Begin Compute, took 0.056859 seconds
+// TimeMonitor::GPU Compute, took 0.783124 seconds
+// TimeMonitor::CPU Compute, took 978.699 seconds
