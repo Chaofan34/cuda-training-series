@@ -111,3 +111,17 @@ int main()
 // TimeMonitor::Begin Compute, took 0.056859 seconds
 // TimeMonitor::GPU Compute, took 0.783124 seconds
 // TimeMonitor::CPU Compute, took 978.699 seconds
+
+/*
+CPU代码慢的分析过程，尝试查看cpu代码的汇编版本
+1. nvcc是将cu文件拆成cuda代码和host代码，cuda代码nvcc编译成ptx, host代码通过gcc/g++编译.s, 可以通过下面命令查看汇编版本
+# PTX
+nvcc -ptx matrix_mul.cu -o matrix_mul.ptx
+# Host 汇编
+nvcc -c -Xcompiler -S matrix_mul.cu -o matrix_mul_host.s
+
+2. 使用chatgpt分析汇编代码: https://chatgpt.com/s/t_689e080327648191bfb4ee0a47b51657
+- 使用函数名搜索.s文件，找到mmul_host函数的汇编代码, 让chatgpt分析代码
+- .cfi_startproc / .cfi_endproc: 调试信息（栈回溯用）
+- .section	.text. 为代码段
+*/
