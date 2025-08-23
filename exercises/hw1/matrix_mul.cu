@@ -2,6 +2,7 @@
 
 // these are just for timing measurments
 #include <time.h>
+#include <omp.h>  // 需要包含OpenMP头文件
 #include "include/error.h"
 #include "include/timer.h"
 
@@ -28,11 +29,13 @@ __global__ void mmul(const float *A, const float *B, float *C, int ds)
 
 void mmul_host(const float *A, const float *B, float *C, int ds)
 {
+  int k = 0; 
+  #pragma omp parallel for collapse(2) private(k)
   for (int i = 0; i < ds; i++)
   {
     // printf("mul_host: i:%d\n", i);
     for (int j = 0; j < ds; j++)
-      for (int k = 0; k < ds; k++)
+      for (k = 0; k < ds; k++)
         C[i * ds + j] += A[i * ds + k] * B[k * ds + j];
   }
 }
