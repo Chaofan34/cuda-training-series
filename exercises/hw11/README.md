@@ -50,3 +50,6 @@ nsys profile --stats=true -t nvtx,cuda -s none -o 4_ranks_no_MPS_N_1e9 -f true m
 ## Experimenting with problem size
 
 Vary the problem size `N` until you've found the minimum size where you can definitively say that MPS provides a clear benefit over the default compute mode case.
+
+## Install MPI
+https://www.mpich.org/downloads/
